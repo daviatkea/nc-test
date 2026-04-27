@@ -44,6 +44,19 @@ function createValidationMiddleware({ router, sendError }) {
     }
   }
 
+  function isValidRootRelativePath(value) {
+    return (
+      typeof value === "string" &&
+      value.startsWith("/") &&
+      !value.startsWith("//") &&
+      !/[\s\\]/.test(value)
+    );
+  }
+
+  function isValidAssetUrl(value) {
+    return isValidUrl(value) || isValidRootRelativePath(value);
+  }
+
   function parseResourceSegments(requestPath) {
     const [resource, id] = requestPath.split("/").filter(Boolean);
     if (id === undefined) {
@@ -114,11 +127,11 @@ function createValidationMiddleware({ router, sendError }) {
       return;
     }
 
-    if (!isValidUrl(asset.url)) {
+    if (!isValidAssetUrl(asset.url)) {
       addError(
         errors,
         `${field}.url`,
-        `${label} asset.url must be a valid URL.`,
+        `${label} asset.url must be a valid URL or root-relative path.`,
       );
     }
   }

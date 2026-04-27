@@ -16,6 +16,12 @@ app.db = router.db;
 
 const validationMiddleware = createValidationMiddleware({ router, sendError });
 
+const middlewares = jsonServer.defaults({
+  static: publicDir,
+});
+
+app.use(middlewares);
+
 app.get("/health", (_req, res) => {
   res.status(200).json({
     status: "ok",
@@ -24,11 +30,6 @@ app.get("/health", (_req, res) => {
   });
 });
 
-const middlewares = jsonServer.defaults({
-  static: publicDir,
-});
-
-app.use(middlewares);
 app.use(jsonServer.bodyParser);
 app.use(validationMiddleware);
 app.use((req, res, next) => {
