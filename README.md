@@ -1,9 +1,5 @@
 # Night Club API
 
-This API now runs on the stable `json-server` 0.17.x line.
-
-The newer `json-server` 1.x release is still beta as of April 2026 and changes core behavior such as ID typing and the server API. This project stays on the latest stable non-beta release to preserve compatibility.
-
 ## Installation
 
 ```bash
@@ -72,8 +68,6 @@ Core write endpoints:
 System endpoint:
 
 - `GET /health`
-
-The Insomnia export in `public/insomnia.json` now includes working examples for the health check, embedded blog post comments, missing routes, invalid comment payloads and duplicate newsletter signups.
 
 ## Validation And Errors
 
