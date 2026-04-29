@@ -42,6 +42,8 @@ Core read endpoints:
 - `GET /comments?eventId=:id`
 - `GET /gallery`
 - `GET /testimonials`
+- `GET /reservations`
+- `GET /reservations?eventId=:id`
 
 Core write endpoints:
 
@@ -188,6 +190,8 @@ Reservation requests also reject unknown table numbers, guest counts above the
 selected table's capacity, and duplicate reservations for the same table on the
 same calendar date. If a reservation includes `eventId`, the event must exist
 and the reservation `date` must be on the same calendar date as that event.
+The frontend can use `GET /reservations` or `GET /reservations?eventId=1` to
+derive which tables are already reserved before submitting a new reservation.
 
 Common status codes:
 

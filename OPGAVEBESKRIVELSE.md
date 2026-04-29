@@ -79,11 +79,15 @@ Designet findes i en Figma-fil under ressourcer på ItsLearning. Der er udlevere
 
 På den baggrund vurderes gruppens evne til at træffe professionelle og velovervejede beslutninger om, hvordan mangler håndteres. Det kan eksempelvis være valg af alternative materialer, brug af billeder fra API'et eller implementering af logo/ikoner via et ikonbibliotek, hvis det giver en mere fleksibel løsning.
 
+I må gerne udfordre designet med mindre reparationer eller et brush-up, hvis det styrker UI-konventioner, best practice og brugervenlighed. Det skal ikke være et redesign; ellers skal løsningen følge designet.
+
 ## Generelle Krav
 
 Sitet skal bygges efter layoutet og den visuelle retning i designmaterialet.
 
 Sitet skal være responsivt, og det er **vigtigt**, at både små og store skærme testes grundigt. Husk helt store skærme, som kan simuleres ved at zoome ud i browseren.
+
+Egne farver i CSS skal være i `oklch()`-format og ikke HEX (`#FF2A70`). Det gør farverne mere forudsigelige at justere og gør det lettere at lave brugbare hover-nuancer, som I nok bør have.
 
 Projektet skal udvikles i et fælles repository, hvor gruppen arbejder sammen om udviklingen. Der skal etableres et klart workflow med `stage`, `commit` og `push`, så udviklingsprocessen kan følges gennem meningsfulde og præcise commit-beskeder.
 
@@ -104,7 +108,11 @@ Book Table
 Contact Us
 ```
 
-Aktive punkter skal vises i pink og med en pink streg under. (Hint: router)
+Aktive punkter skal vises i pink og med en pink streg under (Hint: router). Ved hover skal menupunktets tekst rulle lodret fra hvid til pink, mens den pink streg glider ind under det aktive link.
+
+- Se ressourcer for demo.
+
+**OBS!** Burgermenuen _skal_ implementeres med [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API).
 
 ## Footer
 
@@ -140,36 +148,34 @@ Restaurant
 Bar
 ```
 
-Hvert billede skal have en hover- eller touch-animation:
+Hvert billede skal have en hover- eller touch-animation\*:
 
 - Billedet dækkes af en sort boks.
 - Borders flyver ind fra top og bund.
 - Tekst tonerfrem fra gennemsigtig til synlig.
 - Hele animationen tager 1,5 sekund.
 
-### Sektion 2: Events Of The Month
+\*Se ressourcer for demo på ItsLearning.
 
-Denne sektion viser kommende events fra API'et.
+### Sektion 2: Featured Events
 
-Events vises som et slideshow, hvor hvert slide indeholder to events. Slideshowet kører automatisk i ring mellem alle slides. Når en bruger interagerer med slideshowet, sættes det på pause.
+Denne sektion viser featured events fra API'et (`"isFeatured": true`). Når en bruger flytter musen hen over et event, animeres det\*.
+
+\* Se ressourcer for demo.
 
 Hvert event skal som minimum vise:
 
 - eventnavn
-- kort beskrivelse
+- kort beskrivelse (excerpt)
 - dato
-- tidspunkt eller doors open
+- tidspunkt
 - sted
-- billede
+- billede (thumbnail)
 - en "Book Now"-knap
 
 Indholdet kommer fra `GET /events`.
 
-"Book Now" skal føre brugeren videre til bordbooking, fx med eventets id i URL'en:
-
-```txt
-/reservations?eventId=1
-```
+"Book Now" skal føre brugeren videre til bordbooking.
 
 API'et leverer ikke en færdig booking-URL. Den skal I selv bygge i frontenden ud fra eventets `id`.
 
@@ -179,8 +185,10 @@ Galleriet viser et udvalg af fotos fra events, koncerter og fester. Fotos hentes
 
 Galleriet vises i to dele:
 
-- når den besøgende scroller ned til galleriet, animeres billederne ind
+- når den besøgende scroller ned til galleriet, animeres billederne ind\*
 - når der klikkes på et billede, vises billedet i en lightbox/modal med mulighed for at bladre frem og tilbage mellem billederne
+
+\* Se ressourcer for demo.
 
 ### Sektion 4: Night Club Track
 
@@ -194,13 +202,11 @@ Afspilleren skal som minimum have:
 - visning af aktuel tid og samlet tracklængde
 - et mindre galleri med øvrige kunstnere/tracks
 
-Hvis track-data ikke findes i API'et, kan denne sektion implementeres med statiske data og assets i frontenden.
+Under selve afspilleren er et lille galleri med resten af kunstnerne. Afspilleren spiller kunstnerens musik, når der klikkes på en kunstner i dette galleri.
 
 ### Sektion 5: Latest Video
 
-Denne sektion er en simpel video- eller media-afspiller med de seneste videoer.
-
-Hvis video-data ikke findes i API'et, kan denne sektion implementeres med statiske data og assets i frontenden.
+Denne sektion er en simpel video/media-afspiller med de to seneste videoer.
 
 ### Sektion 6: Testimonials
 
@@ -212,22 +218,7 @@ Informationerne hentes fra API'et via:
 GET /testimonials
 ```
 
-### Sektion 7: Featured Events
-
-Her præsenteres et mindre udvalg af events fra API'et, fx featured events eller de næste tre events.
-
-Hvert card skal som minimum vise:
-
-- billede
-- eventnavn
-- dato
-- kort uddrag
-- kategori eller sted
-- link til eventets detail-side
-
-Når der klikkes på et event, føres den besøgende til eventets egen side.
-
-### Sektion 8: Mailing List Subscription
+### Sektion 7: Mailing List Subscription
 
 Her kan en besøgende tilmelde sig Night Club's nyhedsbrev.
 
@@ -245,15 +236,7 @@ API'et afviser dubletter med HTTP `409 Conflict`, så frontenden skal kunne vise
 
 Events-siden skal vise alle events fra API'et.
 
-Events skal kunne vises med pagination, hvor der maksimalt vises tre events per side. Pagination kan implementeres med router eller URL-parametre.
-
-Eksempel:
-
-```txt
-GET /events?_page=2&_limit=3
-```
-
-Events bør sorteres eller præsenteres efter dato, så brugeren nemt kan forstå programmet.
+Events skal kunne vises med pagination, hvor der maksimalt vises tre events per side.
 
 Hvert event-card skal som minimum indeholde:
 
@@ -262,10 +245,8 @@ Hvert event-card skal som minimum indeholde:
 - dato
 - doors open eller starttidspunkt
 - sted
-- kategori
 - kort uddrag
-- "Read More"- eller "View Event"-knap
-- "Book Now"-knap
+- "Read More"-knap
 
 Når der klikkes på et event, føres brugeren til eventets detail-side. I kan bruge eventets `slug` til segment routes, fx:
 
@@ -300,18 +281,9 @@ Siden skal som minimum vise:
 - længere beskrivelse
 - "Book Now"-knap
 
-Eventets kommentarer skal også vises på siden:
-
-```txt
-GET /comments?eventId=:id
-```
+Eventets kommentarer skal også vises på siden.
 
 Der skal være en formular, hvor brugeren kan skrive en ny kommentar til eventet.
-
-Formularen skal som minimum indeholde:
-
-- navn
-- kommentar
 
 Når formularen sendes, skal der oprettes en kommentar i API'et:
 
@@ -345,11 +317,7 @@ Siden skal bestå af to hoveddele:
 
 Bordene har numre. Når der klikkes på et bord, sættes bordets nummer ind i formularens felt for table number.
 
-Da sitet er event-baseret, skal booking-flowet kunne tage udgangspunkt i et valgt event. Hvis brugeren kommer fra en "Book Now"-knap på et event, bør eventet være forvalgt via URL'en, fx:
-
-```txt
-/reservations?eventId=1
-```
+Da sitet er event-baseret, skal booking-flowet kunne tage udgangspunkt i et valgt event. Hvis brugeren kommer fra en "Book Now"-knap på et event, bør eventet være forvalgt i formularen.
 
 Frontenden skal hente eventet og bruge eventets dato som udgangspunkt for reservationen. Reservationen skal sendes til:
 
@@ -381,18 +349,9 @@ Eksempel:
 }
 ```
 
-Når der klikkes "Reserve", skal brugeren have at vide, om bordet er optaget, eller om reservationen lykkedes.
+Når der klikkes "Reserve", skal brugeren have at vide, om bordet er optaget, eller om reservationen lykkedes. Endnu bedre er det, hvis brugeren kan se, hvilke borde der er optaget, inden de forsøger at reservere.
 
 Alle borde på Night Club bookes for hele aftenen. Det er derfor ikke muligt at reservere samme bord på samme kalenderdato, hvis bordet allerede er optaget.
-
-Frontenden bør selv forsøge at vise optagede borde ud fra eksisterende reservationer:
-
-```txt
-GET /reservations
-GET /reservations?eventId=1
-```
-
-API'et validerer også konflikter og returnerer `409 Conflict`, hvis bordet allerede er reserveret.
 
 Formularen skal valideres, og hvis en besøgende har udfyldt felter forkert, skal der gives brugervenlig feedback.
 
@@ -418,15 +377,18 @@ Formularen skal som minimum indeholde:
 
 ## Aflevering
 
-Afleveringen skal bestå af et link til et GitHub-repository, som fungerer som den officielle aflevering. Dette repository må ikke ændres efter afleveringsfristen.
+Afleveringen skal bestå af fire links:
+
+- GitHub-repository
+- deployet frontend (evt. Vercel)
+- deployet backend (Render)
+- screencast, hvor du demonstrerer en feature, du har udviklet i projektet.
+
+Ingen af delene må ændres efter afleveringsfristen.
 
 Alle ændringer, fejlrettelser eller videre arbejde mellem aflevering og eksamen skal derfor foretages i en fork af det afleverede repository. På den måde forbliver afleveringen uændret, mens gruppen kan arbejde videre frem mod eksamen.
 
-Derudover skal der afleveres en kopi af `db.json` fra API'et, så det er muligt at genskabe en version af jeres data.
-
-Sitet skal ikke deployes på Vercel.
-
-API'et skal deployes til en fjernserver, så sitet kan køre mod en tilgængelig backend. Se `REMOTESERVER.md`.
+API'et skal deployes til en Render-server, så sitet kan køre mod en tilgængelig backend. Se [REMOTESERVER.md](REMOTESERVER.md).
 
 Derudover skal alle selvstændigt lave en screencast på ca. 3 minutter, hvor du demonstrerer en feature, du har udviklet i projektet. I screencasten skal du vise, hvordan featuren fungerer, og med dine egne ord forklare, hvordan du har kodet den.
 
