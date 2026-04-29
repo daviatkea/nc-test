@@ -172,15 +172,6 @@ function createValidationMiddleware({ router, sendError }) {
     }
   }
 
-  function blogpostExists(blogpostId) {
-    return (
-      router.db
-        .get("blogposts")
-        .find({ id: Number(blogpostId) })
-        .value() != null
-    );
-  }
-
   function newsletterEmailExists(email, currentId) {
     const normalizedEmail = email.trim().toLowerCase();
 
@@ -249,35 +240,25 @@ function createValidationMiddleware({ router, sendError }) {
   }
 
   const validators = {
-    blogposts(body, mode) {
-      const errors = [];
-
-      validateRequiredString(body, "title", "title", errors, mode);
-      validateRequiredString(body, "author", "author", errors, mode);
-      validateRequiredString(body, "content", "content", errors, mode);
-      validateRequiredAsset(body, "asset", "asset", errors, mode);
-
-      return errors;
-    },
     comments(body, mode) {
       const errors = [];
 
       validateRequiredPositiveInteger(
         body,
-        "blogpostId",
-        "blogpostId",
+        "eventId",
+        "eventId",
         errors,
         mode,
       );
       if (
-        shouldValidate(body, "blogpostId", mode) &&
-        isPositiveIntegerLike(body.blogpostId)
+        shouldValidate(body, "eventId", mode) &&
+        isPositiveIntegerLike(body.eventId)
       ) {
-        if (!blogpostExists(body.blogpostId)) {
+        if (!getEventById(body.eventId)) {
           addError(
             errors,
-            "blogpostId",
-            "blogpostId must reference an existing blog post.",
+            "eventId",
+            "eventId must reference an existing event.",
           );
         }
       }
