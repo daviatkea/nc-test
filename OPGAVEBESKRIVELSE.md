@@ -87,6 +87,8 @@ Sitet skal bygges efter layoutet og den visuelle retning i designmaterialet.
 
 Sitet skal være responsivt, og det er **vigtigt**, at både små og store skærme testes grundigt. Husk helt store skærme, som kan simuleres ved at zoome ud i browseren.
 
+Alle interaktive elementer skal have tydelige fokus-states, så sitet også kan bruges med tastatur. Fokus-states skal passe til det mørke visuelle design og være lette at se på links, knapper, formularfelter og andre klikbare elementer.
+
 Egne farver i CSS skal være i `oklch()`-format og ikke HEX (`#FF2A70`). Det gør farverne mere forudsigelige at justere og gør det lettere at lave brugbare hover-nuancer, som I nok bør have.
 
 Projektet skal udvikles i et fælles repository, hvor gruppen arbejder sammen om udviklingen. Der skal etableres et klart workflow med `stage`, `commit` og `push`, så udviklingsprocessen kan følges gennem meningsfulde og præcise commit-beskeder.
