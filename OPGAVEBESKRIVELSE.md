@@ -388,6 +388,8 @@ Ingen af delene må ændres efter afleveringsfristen.
 
 Alle ændringer, fejlrettelser eller videre arbejde mellem aflevering og eksamen skal derfor foretages i en fork af det afleverede repository. På den måde forbliver afleveringen uændret, mens gruppen kan arbejde videre frem mod eksamen.
 
+Hvis gruppen ændrer seed-data i API’et, eller hvis bestemte testdata skal kunne genskabes til eksamen, skal den relevante db.json være committet i backend-repoet eller afleveres som kopi. Data oprettet via den deployede Render-server skal ikke betragtes som permanent datalagring.
+
 API'et skal deployes til en Render-server, så sitet kan køre mod en tilgængelig backend. Se [REMOTESERVER.md](REMOTESERVER.md).
 
 Derudover skal alle selvstændigt lave en screencast på ca. 3 minutter, hvor du demonstrerer en feature, du har udviklet i projektet. I screencasten skal du vise, hvordan featuren fungerer, og med dine egne ord forklare, hvordan du har kodet den.

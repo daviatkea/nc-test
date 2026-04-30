@@ -23,7 +23,6 @@ npm run dev
 Useful data scripts:
 
 ```bash
-npm run backup-db
 npm run reset-db
 npm run seed
 ```

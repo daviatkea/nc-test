@@ -1,10 +1,9 @@
 {
-  "name": "nightclub-api-v3",
-  "version": "2.0.0",
+  "name": "nightclub-api",
+  "version": "3.0.0",
   "description": "Mock API for the Night Club project",
   "main": "server.js",
   "scripts": {
-    "backup-db": "node scripts/copy-file.js db.json db_backup.json",
     "dev": "node --watch server.js",
     "reset-db": "node scripts/copy-file.js db_backup.json db.json",
     "seed": "npm run reset-db",
