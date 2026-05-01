@@ -24,7 +24,7 @@ Godt eksempel:
 Indtast venligst en gyldig e-mail, så vi kan sende dig nyhedsbrevet.
 ```
 
-Der skal være fallback-UI for data eller indhold, der er ved at blive hentet. Alle formularer og inputelementer skal valideres i frontenden, inden data sendes til API'et. API'et validerer også data, så frontenden skal kunne håndtere fejlbeskeder fra API'et.
+Der skal være fallback-UI for data eller indhold, der er ved at blive hentet. Alle formularer og inputelementer bør valideres client-side (frontend), inden data sendes til API’et, for at give live feedback og forbedre brugeroplevelsen. Validering skal som minimum implementeres på serversiden (fx. med Zod). API’et validerer også data, og frontenden skal kunne håndtere og præsentere eventuelle fejlbeskeder korrekt.
 
 ## Arbejde Med API'et
 
@@ -37,7 +37,7 @@ npm install
 npm start
 ```
 
-Når API'et kører lokalt, er det tilgængeligt på:
+Når API'et kører lokalt, er det tilgængeligt på: 
 
 ```txt
 http://localhost:4000
