@@ -63,7 +63,7 @@ images: {
 
 Læs API-dokumentationen i [README.md](./README.md).
 
-Til aflevering skal API'et deployes til en fjernserver, så jeres frontend kan afprøves uden en lokal backend. Se [REMOTESERVER.md](./REMOTESERVER.md).
+Til aflevering skal API'et deployes til en fjernserver, så jeres frontend(app) kan afprøves uden en lokal backend(api). Se [REMOTESERVER.md](./REMOTESERVER.md).
 
 ### Centrale Endpoints
 
@@ -400,15 +400,15 @@ Formularen skal som minimum indeholde:
 Afleveringen skal bestå af fire links:
 
 - GitHub-repository
-- deployet frontend (evt. Vercel)
-- deployet backend (Render)
+- deployet frontend(app) (evt. Vercel)
+- deployet backend(api) (Render)
 - screencast, hvor du demonstrerer en feature, du har udviklet i projektet.
 
 Ingen af delene må ændres efter afleveringsfristen.
 
 Alle ændringer, fejlrettelser eller videre arbejde mellem aflevering og eksamen skal derfor foretages i en fork af det afleverede repository. På den måde forbliver afleveringen uændret, mens gruppen kan arbejde videre frem mod eksamen.
 
-Hvis gruppen ændrer seed-data i API’et, eller hvis bestemte testdata skal kunne genskabes til eksamen, skal den relevante db.json være committet i backend-repoet eller afleveres som kopi. Data oprettet via den deployede Render-server skal ikke betragtes som permanent datalagring.
+Hvis gruppen ændrer seed-data i API’et, eller hvis bestemte testdata skal kunne genskabes til eksamen, skal den relevante db.json være committet i backend-repoet(api) eller afleveres som kopi. Data oprettet via den deployede Render-server skal ikke betragtes som permanent datalagring.
 
 API'et skal deployes til en Render-server, så sitet kan køre mod en tilgængelig backend. Se [REMOTESERVER.md](REMOTESERVER.md).
 
