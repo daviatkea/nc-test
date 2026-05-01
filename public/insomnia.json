@@ -407,7 +407,7 @@
       "created": 1647281361548,
       "url": "{{ _.base_url }}/newsletters",
       "name": "Newsletter Subscriptions",
-      "description": "Creates a newsletter subscription. Required field: `email`. Duplicate emails return `409 RESOURCE_CONFLICT`.",
+      "description": "Creates a newsletter subscription. Required field: `email`. Duplicate emails return `409 EMAIL_ALREADY_SUBSCRIBED`.",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
@@ -663,7 +663,7 @@
       "created": 1777275000000,
       "url": "{{ _.base_url }}/newsletters",
       "name": "Duplicate Newsletter Signup (409)",
-      "description": "Uses a seeded email address to demonstrate the `RESOURCE_CONFLICT` response for duplicate newsletter subscriptions.",
+      "description": "Uses a seeded email address to demonstrate the `EMAIL_ALREADY_SUBSCRIBED` response for duplicate newsletter subscriptions.",
       "method": "POST",
       "body": {
         "mimeType": "application/json",

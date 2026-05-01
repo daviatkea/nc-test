@@ -409,7 +409,7 @@ function createValidationMiddleware({ router, sendError }) {
           addError(
             errors,
             "email",
-            "This email address is already subscribed to the newsletter.",
+            "This email address is already subscribed.",
             "conflict",
           );
         }
@@ -455,16 +455,23 @@ function createValidationMiddleware({ router, sendError }) {
       const status = errors.some((error) => error.code === "conflict")
         ? 409
         : 400;
+      const isDuplicateNewsletter =
+        resource === "newsletters" &&
+        errors.some(
+          (error) => error.field === "email" && error.code === "conflict",
+        );
+      let code = "VALIDATION_ERROR";
+      let message = "Request validation failed.";
 
-      sendError(
-        res,
-        status,
-        status === 409 ? "RESOURCE_CONFLICT" : "VALIDATION_ERROR",
-        status === 409
-          ? "Request conflicts with existing data."
-          : "Request validation failed.",
-        errors,
-      );
+      if (isDuplicateNewsletter) {
+        code = "EMAIL_ALREADY_SUBSCRIBED";
+        message = "This email address is already subscribed.";
+      } else if (status === 409) {
+        code = "RESOURCE_CONFLICT";
+        message = "Request conflicts with existing data.";
+      }
+
+      sendError(res, status, code, message, errors);
       return;
     }
 
