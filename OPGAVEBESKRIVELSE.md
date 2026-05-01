@@ -26,7 +26,7 @@ Indtast venligst en gyldig e-mail, så vi kan sende dig nyhedsbrevet.
 
 Der skal være fallback-UI for data eller indhold, der er ved at blive hentet. Alle formularer og inputelementer bør valideres client-side (frontend), inden data sendes til API’et, for at give live feedback og forbedre brugeroplevelsen. Validering skal som minimum implementeres på serversiden (fx. med Zod). API’et validerer også data, og frontenden skal kunne håndtere og præsentere eventuelle fejlbeskeder korrekt.
 
-Hvis projektet bygges i Next.js, skal data fetching fra API'et som udgangspunkt foregå på serveren. Det betyder, at `GET`-data skal hentes i Server Components, server functions, route handlers eller tilsvarende server-side kode. API-data må ikke hentes i `useEffect` i client components. `useEffect` må gerne bruges til interaktion, lokal UI-state, formularfeedback og browser-specifik funktionalitet, men de må ikke erstatte server-side data fetching.
+Hvis projektet bygges i Next.js, skal data fetching fra API'et som udgangspunkt foregå på serveren. Det betyder, at data skal hentes i Server Components, server functions, route handlers eller tilsvarende server-side kode. API-data må ikke hentes i `useEffect` i client components. `useEffect` må gerne bruges til interaktion, lokal UI-state, formularfeedback og browser-specifik funktionalitet, men de må ikke erstatte server-side data fetching.
 
 ## Arbejde Med API'et
 
